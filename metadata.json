@@ -1,0 +1,9 @@
+{
+  "name": "Paul's Roofing Homeowner's Handbook and AI Tools",
+  "description": "A comprehensive content hub for Paul's Roofing, featuring blog posts, homeowner resources, and AI-powered tools for Southern New Brunswick homeowners.",
+  "requestFramePermissions": [
+    "microphone",
+    "camera",
+    "geolocation"
+  ]
+}
