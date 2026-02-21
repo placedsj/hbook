@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { ViewState, BlogPost } from './types';
-import { BLOG_POSTS } from './constants';
+import { BLOG_POSTS, CATEGORIES } from './constants';
 
 import { 
   sendChatMessage, 
@@ -31,10 +31,13 @@ const ToolIcon = ({ name }: { name: string }) => {
 
 // --- Components ---
 
-const Header = ({ setView }: { setView: (v: ViewState) => void }) => (
+const Header = ({ setView }: { setView: (v: ViewState) => void }) => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  return (
   <header className="bg-white sticky top-0 z-50 shadow-sm border-b border-stone-100 font-sans">
     <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-      <div className="flex items-center space-x-2 cursor-pointer" onClick={() => setView(ViewState.HOME)}>
+      <div className="flex items-center space-x-2 cursor-pointer" onClick={() => { setView(ViewState.HOME); setMenuOpen(false); }}>
         <div className="text-[#2F5C39]">
            <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/></svg>
         </div>
@@ -47,7 +50,6 @@ const Header = ({ setView }: { setView: (v: ViewState) => void }) => (
         <button onClick={() => setView(ViewState.HOME)} className="text-stone-600 font-medium hover:text-[#2F5C39] transition">Services</button>
         <button onClick={() => setView(ViewState.BLOG_LIST)} className="text-stone-600 font-medium hover:text-[#2F5C39] transition">Homeowner Handbook</button>
         <button onClick={() => setView(ViewState.AI_TOOLS)} className="text-stone-600 font-medium hover:text-[#2F5C39] transition flex items-center">
-
           <span className="mr-1">AI Tools</span>
           <span className="bg-[#C5A572] text-white text-[10px] px-1.5 py-0.5 rounded-full">New</span>
         </button>
@@ -55,12 +57,25 @@ const Header = ({ setView }: { setView: (v: ViewState) => void }) => (
           Get a Free Estimate
         </button>
       </nav>
-      <button className="md:hidden text-stone-700">
+      <button className="md:hidden text-stone-700" onClick={() => setMenuOpen(o => !o)} aria-label="Toggle menu">
         <MenuIcon />
       </button>
     </div>
+    {menuOpen && (
+      <div className="md:hidden bg-white border-t border-stone-100 px-4 pb-4 flex flex-col space-y-3">
+        <button onClick={() => { setView(ViewState.HOME); setMenuOpen(false); }} className="text-stone-700 font-medium py-2 text-left hover:text-[#2F5C39] transition">Services</button>
+        <button onClick={() => { setView(ViewState.BLOG_LIST); setMenuOpen(false); }} className="text-stone-700 font-medium py-2 text-left hover:text-[#2F5C39] transition">Homeowner Handbook</button>
+        <button onClick={() => { setView(ViewState.AI_TOOLS); setMenuOpen(false); }} className="text-stone-700 font-medium py-2 text-left hover:text-[#2F5C39] transition flex items-center gap-2">
+          AI Tools <span className="bg-[#C5A572] text-white text-[10px] px-1.5 py-0.5 rounded-full">New</span>
+        </button>
+        <button className="bg-[#C5A572] hover:bg-[#B09060] text-white font-bold py-3 px-6 rounded-full transition shadow-md w-full">
+          Get a Free Estimate
+        </button>
+      </div>
+    )}
   </header>
-);
+  );
+};
 
 const Footer = () => (
   <footer className="bg-[#1B3B24] text-stone-300 py-16">
@@ -194,7 +209,7 @@ const LocalImpact = () => (
          </div>
          <div className="md:w-1/2 space-y-8">
             <div className="bg-[#FDFBF7] p-8 rounded-2xl border border-stone-100 flex items-start space-x-6 relative shadow-sm">
-                <div className="absolute -top-3 -left-3 text-6xl text-[#E8F5E9] font-serif leading-none">"</div>
+                <div className="absolute -top-3 -left-3 text-6xl text-[#E8F5E9] font-serif leading-none">&ldquo;</div>
                 <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Reviewer" className="w-14 h-14 rounded-full object-cover border-2 border-white shadow-sm z-10" />
                 <div className="z-10">
                   <p className="text-stone-700 italic mb-4 text-lg">&quot;Paul&apos;s team was professional and efficient. Our new roof looks amazing and the site was spotless when they left! Highly recommend the AI visualizer too.&quot;</p>
@@ -206,7 +221,7 @@ const LocalImpact = () => (
             </div>
             <div>
                <h3 className="font-bold text-xl text-stone-900 mb-2">Rooted in the Community</h3>
-               <p className="text-stone-600 leading-relaxed">We don't just work here; we live here. From sponsoring the local hockey league to volunteering for Habitat for Humanity, PaulRoofs is proud to be a part of Saint John's fabric.</p>
+               <p className="text-stone-600 leading-relaxed">We don&apos;t just work here; we live here. From sponsoring the local hockey league to volunteering for Habitat for Humanity, PaulRoofs is proud to be a part of Saint John&apos;s fabric.</p>
             </div>
          </div>
       </div>
@@ -214,19 +229,41 @@ const LocalImpact = () => (
   </section>
 );
 
-const FixOfTheWeek = () => (
+const QUICK_TIPS = [
+  {
+    title: 'Fix of the Week: Draft-Proofing',
+    body: 'Seal windows and doors with caulk/weatherstripping. Crucial for Atlantic winters to prevent heat loss.',
+  },
+  {
+    title: 'Tip: Check Your Attic Hatch',
+    body: 'An uninsulated attic hatch is a direct heat leak. Add weatherstripping and R-10 rigid foam to the back—10 minutes, big savings.',
+  },
+  {
+    title: 'Reminder: Sump Pump Test',
+    body: 'Pour a bucket of water into the pit before spring melt hits. A failed sump pump during thaw season can mean a flooded basement.',
+  },
+  {
+    title: 'Safety: GFCI Outlets',
+    body: 'Test garage and bathroom GFCI outlets monthly. Press "Test" then "Reset"—if the outlet stays dead after reset, replace it immediately.',
+  },
+];
+
+const FixOfTheWeek = ({ tipIndex = 0 }: { tipIndex?: number }) => {
+  const tip = QUICK_TIPS[tipIndex % QUICK_TIPS.length];
+  return (
   <div className="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-lg shadow-sm mb-8">
     <div className="flex items-start">
       <div className="bg-blue-100 p-2 rounded-full mr-4 text-blue-600">
         <ToolIcon name="bolt" />
       </div>
       <div>
-        <h3 className="text-blue-900 font-bold text-lg mb-1">Fix of the Week: Draft-Proofing</h3>
-        <p className="text-blue-800 text-sm">Seal windows and doors with caulk/weatherstripping. Crucial for Atlantic winters to prevent heat loss.</p>
+        <h3 className="text-blue-900 font-bold text-lg mb-1">{tip.title}</h3>
+        <p className="text-blue-800 text-sm">{tip.body}</p>
       </div>
     </div>
   </div>
-);
+  );
+};
 
 const BlogCard: React.FC<{ post: BlogPost; onClick: () => void }> = ({ post, onClick }) => (
   <div onClick={onClick} className="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer overflow-hidden border border-stone-100 flex flex-col h-full group">
@@ -267,7 +304,7 @@ const ArticleChat = ({ article }: { article: string }) => {
     try {
       const responseText = await sendArticleChatMessage(history, input, article);
       setHistory(h => [...h, { role: 'model', parts: [{ text: responseText || "I'm not sure about that." }] }]);
-    } catch (e) {
+    } catch {
       setHistory(h => [...h, { role: 'model', parts: [{ text: "Sorry, connection issue." }] }]);
     } finally {
       setLoading(false);
@@ -414,19 +451,73 @@ const BlogPostDetail = ({ post, onBack }: { post: BlogPost; onBack: () => void }
 
 
 const BlogList = ({ setView, setSelectedBlogPostId }: { setView: (v: ViewState) => void, setSelectedBlogPostId: (id: string) => void }) => {
+  const [search, setSearch] = useState('');
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+
+  const filtered = BLOG_POSTS.filter(post => {
+    const matchesSearch = search.trim() === '' || 
+      post.title.toLowerCase().includes(search.toLowerCase()) ||
+      post.excerpt.toLowerCase().includes(search.toLowerCase()) ||
+      post.tags.some(t => t.toLowerCase().includes(search.toLowerCase()));
+    const matchesCategory = activeCategory === null || post.category === activeCategory;
+    return matchesSearch && matchesCategory;
+  });
+
   return (
     <section className="py-16 bg-[#FDFBF7]">
       <div className="container mx-auto px-4">
-        <h1 className="text-5xl font-bold text-stone-900 mb-12 text-center">Homeowner's Handbook</h1>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {BLOG_POSTS.map(post => (
-            <BlogCard 
-              key={post.id} 
-              post={post} 
-              onClick={() => { setSelectedBlogPostId(post.id); setView(ViewState.BLOG_POST_DETAIL); }} 
-            />
+        <h1 className="text-5xl font-bold text-stone-900 mb-6 text-center">Homeowner&apos;s Handbook</h1>
+        <p className="text-center text-stone-500 mb-10 max-w-2xl mx-auto">Expert guides, pro tips, and local know-how for Southern New Brunswick homeowners.</p>
+
+        {/* Search Bar */}
+        <div className="max-w-xl mx-auto mb-8 relative">
+          <input
+            type="text"
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+            placeholder="Search articles, tips, tags..."
+            className="w-full border border-stone-200 rounded-full px-6 py-3 text-sm focus:outline-none focus:border-[#C5A572] shadow-sm bg-white"
+          />
+          {search && (
+            <button onClick={() => setSearch('')} className="absolute right-4 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-700 text-lg leading-none">×</button>
+          )}
+        </div>
+
+        {/* Category Filter */}
+        <div className="flex flex-wrap justify-center gap-2 mb-10">
+          <button
+            onClick={() => setActiveCategory(null)}
+            className={`px-4 py-1.5 rounded-full text-sm font-semibold transition border ${activeCategory === null ? 'bg-[#2F5C39] text-white border-[#2F5C39]' : 'bg-white text-stone-600 border-stone-200 hover:border-[#2F5C39] hover:text-[#2F5C39]'}`}
+          >
+            All
+          </button>
+          {CATEGORIES.map(cat => (
+            <button
+              key={cat}
+              onClick={() => setActiveCategory(activeCategory === cat ? null : cat)}
+              className={`px-4 py-1.5 rounded-full text-sm font-semibold transition border ${activeCategory === cat ? 'bg-[#2F5C39] text-white border-[#2F5C39]' : 'bg-white text-stone-600 border-stone-200 hover:border-[#2F5C39] hover:text-[#2F5C39]'}`}
+            >
+              {cat}
+            </button>
           ))}
         </div>
+
+        {filtered.length === 0 ? (
+          <div className="text-center text-stone-400 py-20">
+            <p className="text-lg">No articles found.</p>
+            <button onClick={() => { setSearch(''); setActiveCategory(null); }} className="mt-4 text-[#C5A572] font-bold hover:underline">Clear filters</button>
+          </div>
+        ) : (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filtered.map(post => (
+              <BlogCard 
+                key={post.id} 
+                post={post} 
+                onClick={() => { setSelectedBlogPostId(post.id); setView(ViewState.BLOG_POST_DETAIL); }} 
+              />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
@@ -464,7 +555,7 @@ const ChatBot = () => {
     try {
       const responseText = await sendChatMessage(history, input);
       setHistory(h => [...h, { role: 'model', parts: [{ text: responseText || "I'm having trouble thinking right now." }] }]);
-    } catch (e) {
+    } catch {
       setHistory(h => [...h, { role: 'model', parts: [{ text: "Sorry, I encountered an error connecting to Paul's brain." }] }]);
     } finally {
       setLoading(false);
@@ -475,7 +566,7 @@ const ChatBot = () => {
     <div className="flex flex-col h-[500px] bg-white rounded-2xl shadow-xl border border-stone-100 overflow-hidden">
       <div className="p-4 bg-[#2F5C39] text-white flex items-center">
         <ToolIcon name="chat" />
-        <span className="font-bold ml-2">Paul's AI Assistant</span>
+        <span className="font-bold ml-2">Paul&apos;s AI Assistant</span>
       </div>
       <div className="flex-grow p-6 overflow-y-auto space-y-4 bg-[#FDFBF7]">
         {history.length === 0 && (
@@ -681,7 +772,7 @@ const ShedVisualizer = () => {
 const LocalExpert = () => {
   const [query, setQuery] = useState('');
   const [location, setLocation] = useState<{lat: number, lng: number} | null>(null);
-  const [result, setResult] = useState<{text?: string, sources?: any} | null>(null);
+  const [result, setResult] = useState<{text?: string | null, sources?: {groundingChunks?: {web?: {uri?: string; title?: string}}[]}} | null>(null);
   const [loading, setLoading] = useState(false);
   const [mode, setMode] = useState<'search' | 'maps'>('search');
 
@@ -745,7 +836,7 @@ const LocalExpert = () => {
               <div className="mt-3 border-t border-stone-200 pt-3">
                 <strong className="text-xs text-stone-500 block mb-2 uppercase tracking-wide">Sources:</strong>
                 <div className="flex flex-wrap gap-2">
-                   {result.sources.groundingChunks?.map((chunk: any, i: number) => (
+                   {result.sources.groundingChunks?.map((chunk: {web?: {uri?: string; title?: string}}, i: number) => (
                      chunk.web?.uri ? (
                        <a key={i} href={chunk.web.uri} target="_blank" rel="noreferrer" className="text-xs text-[#2F5C39] hover:underline truncate max-w-[150px] bg-[#E8F5E9] px-2 py-1 rounded">{chunk.web.title || 'Source'}</a>
                      ) : null
@@ -835,8 +926,9 @@ const Home = ({ setView, setSelectedBlogPostId }: { setView: (v: ViewState) => v
 
             <div className="lg:w-1/3">
                <h2 className="text-3xl font-bold text-stone-900 mb-8">Quick Tips</h2>
-               <FixOfTheWeek />
-               <FixOfTheWeek />
+               <FixOfTheWeek tipIndex={0} />
+               <FixOfTheWeek tipIndex={1} />
+               <FixOfTheWeek tipIndex={2} />
             </div>
           </div>
         </div>
