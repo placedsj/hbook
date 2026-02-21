@@ -198,6 +198,84 @@ Every storm brings out the "storm chasers"—unlicensed contractors looking for 
     date: 'Feb 24, 2026',
     imageUrl: 'https://picsum.photos/800/400?random=7',
     tags: ['Legal', 'Financial', 'Contractors']
+  },
+  {
+    id: '8',
+    title: 'Emergency Roof Tarp - What to Do When a Tree Hits Your Roof',
+    excerpt: 'A fallen branch at 2am doesn\'t wait for business hours. Here is the 30-minute emergency response that limits water damage and saves your ceiling.',
+    content: `## Storm Damage Doesn't Wait for Business Hours
+
+A large branch comes through your roof at 2am during a nor'easter. The rain is pouring in. Here is exactly what to do.
+
+### Step 1: Ensure Safety First (0-5 minutes)
+*   **Stay inside** if wind is still gusting—never go on a wet roof in a storm.
+*   Cut power to affected rooms at the breaker if water is near electrical fixtures.
+*   Move valuables, furniture, and electronics away from the wet area.
+
+### Step 2: Contain the Damage (5-15 minutes)
+*   Place buckets and lay plastic sheeting or towels to catch dripping water.
+*   If water is pooling, use a wet/dry vac to prevent floor and ceiling collapse.
+
+### Step 3: The Emergency Tarp (Only If Safe)
+Once wind drops below 30 km/h and it's daylight:
+*   **Materials needed:** 6-mil poly tarp (larger than hole by 4 feet on each side), 2×4 lumber, staple gun, rope.
+*   Lay the tarp over the damaged section, extending over the ridge peak.
+*   Nail 2×4s along the tarp edges to weight it down—**never rely on rope alone in NB wind.**
+
+### Step 4: Document Everything
+*   Photograph damage before any repairs for your insurance claim.
+*   Call your insurer within 24 hours—most policies require prompt notification.
+
+### Cost Reality
+Emergency tarp service: $300-$600 for a professional crew. Full repair after assessment: varies widely. **Insurance deductibles are typically $1,000-$2,500—know yours before you call.**
+
+> **Dad's Warning:** "A tarp is a band-aid, not a fix. Get a proper assessment within 72 hours before hidden rot sets in."`,
+    category: 'Emergency',
+    readTime: '7 min',
+    date: 'Mar 1, 2026',
+    imageUrl: 'https://picsum.photos/800/400?random=8',
+    tags: ['Emergency', 'Storm', 'Insurance']
+  },
+  {
+    id: '9',
+    title: 'The Annual Home Maintenance Checklist: Every Season, Every Task',
+    excerpt: 'A printable, season-by-season guide to keeping your NB home in top condition—from spring thaw to winter prep.',
+    content: `## The Four-Season Playbook for NB Homeowners
+
+Atlantic Canada's climate is hard on houses. Here is the master checklist that professional contractors use for their own homes.
+
+### Spring (April–May)
+*   ✅ **Roof inspection:** Walk the perimeter and look for lifted or missing shingles after ice dam season.
+*   ✅ **Gutter cleaning:** Clear winter debris; check for gutter sagging or pulling away from fascia.
+*   ✅ **Foundation check:** Look for new cracks after freeze/thaw. Apply hydraulic cement to small cracks immediately.
+*   ✅ **Sump pump test:** Pour water in the pit to confirm it activates before spring melt.
+*   ✅ **Window & door caulking:** Inspect exterior caulk; crack-free should last 5-7 years in our climate.
+*   ✅ **Deck boards:** Check for rot, loose screws, and heaved boards from frost.
+
+### Summer (June–August)
+*   ✅ **Attic ventilation:** Ensure soffit vents aren't blocked by insulation (critical for next winter's ice dam prevention).
+*   ✅ **A/C service:** Change filters; clear debris from outdoor condenser unit.
+*   ✅ **Tree trimming:** Keep branches 3+ feet from roof—dead limbs are NB's #1 cause of emergency repairs.
+*   ✅ **Exterior paint & staining:** Best done above 10°C with low humidity.
+
+### Fall (September–November)
+*   ✅ **Gutter cleaning (second pass):** After leaf fall, before first freeze.
+*   ✅ **Weatherstripping:** Replace worn door seals before heating season.
+*   ✅ **Heating system service:** Oil furnace tune-up; replace filters on forced-air systems.
+*   ✅ **Chimney inspection:** Clean and inspect before first use.
+*   ✅ **Outdoor tap winterization:** Drain and shut off exterior taps to prevent pipe burst.
+
+### Winter (December–March)
+*   ✅ **Roof rake after heavy snow:** Rake snow from eaves (first 4 feet) to prevent ice dams.
+*   ✅ **Ice dam monitoring:** Check attic temp—should stay below 0°C on roof deck.
+*   ✅ **Condensation check:** Frost on cold interior surfaces signals humidity or air sealing issues.
+
+> **Dad's Rule:** "If it takes less than 30 minutes and costs less than $50, do it today. The $30 fix today is the $3,000 fix you avoid next year."`,
+    category: 'Maintenance',
+    readTime: '9 min',
+    date: 'Mar 5, 2026',
+    imageUrl: 'https://picsum.photos/800/400?random=9',
+    tags: ['Checklist', 'Seasonal', 'DIY']
   }
 ];
 

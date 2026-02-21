@@ -1,4 +1,4 @@
-import { GoogleGenAI, GenerateContentResponse, Modality } from "@google/genai";
+import { GoogleGenAI, Modality } from "@google/genai";
 
 // Initialize the client. 
 // Note: We create a new instance in functions to ensure we pick up the latest key if it changes (e.g. via key selector).
