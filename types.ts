@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import React from 'react';
 
 export interface BlogPost {
   id: string;
@@ -30,5 +30,5 @@ export interface ToolConfig {
   id: string;
   name: string;
   description: string;
-  icon: ReactNode;
+  icon: React.ReactNode;
 }
